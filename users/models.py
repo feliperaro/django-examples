@@ -4,6 +4,8 @@ from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin, Base
 
 from uuid import uuid4
 
+import os
+
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password, **extra_fields):
@@ -22,11 +24,15 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
+def get_upload_path(instance, filename):
+    return os.path.join('images', 'avatars', str(instance.pk), filename)
+
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
+    avatar = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
