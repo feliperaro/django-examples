@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+
+{% block main %}
+
+<div class="columns is-centered">
+    <div class="column is-one-third">
+
+        {% if form.has_errors %}
+        <div class="block">
+            <div class="notification is-danger">
+                <p>Please check errors and submit the form again</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="block">
+            <p class="title is-3">Welcome</p>
+            <p class="subtitle is-5 has-text-grey-light">Create new account</p>
+        </div>
+        <!--  -->
+        <div class="box block">
+            <form action="." method="post">
+                {% csrf_token %}
+                <div class="field">
+                    <label class="label">Email address</label>
+                    <div class="control">
+                        <input type="email" name="email" class="input">
+                        {% for err in form.email.errors %}
+                            <p class="help is-danger">{{err}}</p>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input type="password" name="password1" class="input">
+                        {% for err in form.password1.errors %}
+                            <p class="help is-danger">{{err}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Repeat your password</label>
+                    <div class="control">
+                        <input type="password" name="password2" class="input">
+                        {% for err in form.password2.errors %}
+                            <p class="help is-danger">{{err}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="block">
+                    <button type="submit" class="button is-primary is-fullwidth">Create an account</button>
+                </div>
+            </form>
+        </div>
+        <!--  -->
+        <div class="block">
+            <p>Do you have an account?</p>
+            <a href="{% url 'users:login_view' %}">Login</a>
+        </div>
+        <!--  -->
+    </div>
+</div>
+
+{% endblock main %}

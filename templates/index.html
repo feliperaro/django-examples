@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Examples App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-light is-fixed-top">
+        <div class="navbar-brand"></div>
+        <div class="navbar-menu">
+            {% if request.is_authenticated %}
+            <div class="navbar-start"></div>
+            <div class="navbar-end">
+                <a href="{% url 'users:logout_view' %}" class="navbar-item">Log out</a>
+            </div>
+            {% else %}
+            <div class="navbar-end">
+                <a href="{% url 'users:login_view' %}" class="navbar-item">Log in</a>
+                <a href="{% url 'users:signup_view' %}" class="navbar-item">Signup</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="section">
+        <div class="container">
+            {% block main %} {% endblock main %}
+        </div>
+    </main>
+    
+</body>
+</html>

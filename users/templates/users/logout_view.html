@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block main %}
+
+<div class="notification is-success is-light">
+    <p>You have logged out successfully</p>
+    <p>
+        <a href="{% url 'users:login_view' %}">Log in again</a>
+    </p>
+</div>
+
+{% endblock main %}
