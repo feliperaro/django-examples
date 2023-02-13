@@ -119,6 +119,18 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'users.User'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = '/users/login/'
+
+USE_S3 = env.bool('USE_S3', False)
+
+if USE_S3:
+    AWS_ACCESS_KEY_ID = env('S3_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('S3_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('S3_BUCKET_NAME')
+    AWS_S3_ENDPOINT_URL = env('S3_HOST')
+    MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}media/"
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+else:
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
