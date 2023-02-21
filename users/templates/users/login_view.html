@@ -15,14 +15,17 @@
                 <div class="field">
                     <label class="label">Email address</label>
                     <div class="control">
-                        <input type="email" name="email">
+                        <input type="email" name="email" class="input">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Password</label>
                     <div class="control">
-                        <input type="password" name="Password">
+                        <input type="password" name="Password" class="input">
                     </div>
+                </div>
+                <div class="block">
+                    {{form.captcha}}
                 </div>
                 <div class="block">
                     <button type="submit" class="button is-primary is-fullwidth">Log in</button>

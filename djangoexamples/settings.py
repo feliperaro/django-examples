@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import environ
+import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'captcha',
     'users',
     'projects',
 ]
@@ -134,3 +136,9 @@ else:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_TEST_MODE = False
+
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    CAPTCHA_TEST_MODE = True
