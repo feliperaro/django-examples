@@ -33,6 +33,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
+    is_email_confirmed = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
+
+class EmailConfirmationToken(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

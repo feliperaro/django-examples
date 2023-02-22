@@ -140,5 +140,7 @@ else:
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 CAPTCHA_TEST_MODE = False
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
     CAPTCHA_TEST_MODE = True
