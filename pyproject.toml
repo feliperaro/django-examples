@@ -15,6 +15,7 @@ pillow = "^9.4.0"
 django-storages = "^1.13.2"
 boto3 = "^1.26.67"
 django-simple-captcha = "^0.5.17"
+coverage = "^7.2.0"
 
 
 [build-system]
